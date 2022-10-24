@@ -73,13 +73,13 @@ html::-webkit-scrollbar {
 .homepage {
     height: 100%;
     width: 100%;
-    background: url(../images/bg_pic2.png) round;
+    background: url(../Test-World-Hospital-Website/images/bg_pic2.png) round;       // 本地部署去掉 Test-World-Hospital-Website/
 }
 @media (max-width: 633px) {
     .homepage {
         height: 100%;
         width: 100%;
-        background: url(../images/bg_pic2_sm.png);
+        background: url(../Test-World-Hospital-Website/images/bg_pic2_sm.png);
     }
 }
 /* 主页欢迎词样式 */
