@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="lang">
+  <head>
+    <title>TEST-WORLD HOSPITAL | 预约挂号</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/reservation.css">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+  </head>
+  <body>
+<!-- 导航栏 -->
+<header class="navbar navbar-expand-lg navbar-light flex-column align-items-start flex-lg-row iheadbar py-3 sticky-top" style="background-color: white;">
+  <!-- 医院图标 -->
+  <a class="navbar-brand" href="#">
+    <img src="images/hospital_icon.png" alt="医院图标">
+  </a>
+  <!-- 导航栏内容 -->
+  <div class="navbar-content flex-row justify-content-between align-items-center mt-lg-2">
+    <!-- 医院名称 -->
+    <a class="ititle" style="color: #2c608a;" href="#">TEST-WORLD HOSPITAL</a>
+    <!-- 折叠导航栏 -->
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar"
+      aria-expanded="false" aria-label="Toggle navigation" style="height: 36px;">
+      ≡
+    </button>
+    </div>
+    <!-- 菜单 -->
+    <div class="collapse navbar-collapse imenu" id="top-navbar">
+      <ul class="navbar-nav mt-1 ml-auto">
+        <li class="nav-item active iunderline">
+          <a class="nav-link mr-3" style="color: #2c608a;" href="index.html">首页</a>
+        </li>
+        <li class="nav-item iunderline">
+          <a class="nav-link iactive mr-3" style="color: #2c608a;" href="#">预约挂号</a>
+        </li>
+        <li class="nav-item iunderline">
+          <a class="nav-link mr-3" style="color: #2c608a;" href="department.html">科室导航</a>
+        </li>
+        <li class="nav-item iunderline">
+          <a class="nav-link mr-3" style="color: #2c608a;" href="queryReport.html">报告查询</a>
+        </li>
+        <!-- 下拉展开的二级菜单 -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-3" style="color: #2c608a;" href="#" id="navbar-about" data-toggle="dropdown" aria-expanded="false">
+            更多
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbar-about">
+            <a class="dropdown-item" href="#">党群建设</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">人才招聘</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">意见反馈</a>
+          </div>
+        </li>
+      </ul>
+  </div>
+</header>
+    <!-- 疫情防控就诊须知弹窗 -->
+    <div class="modal fade" id="covid19-notice" tabindex="-1" aria-labelledby="covid19-notice-title" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="covid19-notice-title">新冠肺炎疫情防控就诊须知</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body covid19-notice-content">
+            <p>尊敬的市民朋友：</p>
+            <p>您好!</p>
+            <p>根据湖南省应对新冠肺炎疫情联防联控机制发布的疫情防控要求，本院为进一步加强新冠疫情防控，现将就诊须知公告如下：</p>
+            <p><strong>一、 门诊就医</strong></p>
+            <p>1. 进入门诊时，恳请您全程佩戴好口罩，配合工作人员进行流调、接受体温检测，出示“两码”——场所码、行程码给工作人员查看，主动告知医院工作人员近期旅居史、疫区人员接触史等流行病学信息，如有隐瞒可能会导致疫情播散，您将承担相应法律责任。在入口闸机处需扫健康码或身份证进入门诊。在候诊、缴费等待时自觉保持“一米线”间距。</p>
+            <p>2. 所有外省来院人员需持有省内<span style="color: #e67777;"> 48小时 </span>核酸阴性证明。有流行病学史或新冠相关症状的患者请到诊疗中心发热门诊排查。</p>
+            <p><strong> 二、 核酸检测</strong></p>
+            <p>来院做核酸检测的人员需持身份证原件、佩戴口罩、检测体温、扫场所码、出示行程码，配合医护人员完成流行病学史询问后，根据工作人员指引，到相应采样点采样。</p>
+            <div class="d-flex justify-content-between">
+              <div style="font-size: 0.9em;"><strong>感谢您的支持与配合！</strong></div>
+              <div style="font-size: 0.9em;"><strong>2022年9月22日</strong></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">我已知悉</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 顶部提示语 -->
+    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+      TEST-WORLD HOSPITAL 提醒您，请通过正规渠道挂号！
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- 主页内容 -->
+    <div class="reservation-page d-flex flex-column mt-5" id="reservation">
+      <div class="row justify-content-center">
+        <!-- 搜索栏 & 一类科室 & 右侧列表点击挂号后切换为就诊人信息 -->
+        <div class="order-md-1 col-11 col-md-4">
+
+          <!-- 搜索栏 -->
+          <div class="row doc-search" v-show="isReserve === false">
+            <input type="text" class="form-control text-center order-md-1 col-md-8 mb-2 mb-md-0 mr-md-1" placeholder="请输入科室或医生名称">
+            <button type="submit" class="btn btn-success mx-auto order-md-2 col-9 col-md-3 mx-0" v-on:click="searchDoc">搜索</button>
+          </div>
+
+          <!-- 搜索栏下方列表 -->
+          <div id="docInfo-list" class="mt-4" :class="isReserve === true ? 'disableClick' : ''" v-show="isReserve === false">
+            <!-- 一类科室列表 -->
+            <ul class="list-group">
+              <div v-for="(department_info,index) in departmentInfo">
+                <button type="button" class="list-group-item list-group-item-action" @click="clickWho($event)"
+                        data-toggle="collapse" :data-target="'#depart_' + index" aria-expanded="false" :aria-controls="currentShowID">
+                  <div class="d-flex justify-content-between align-items-center" :getClickedId="department_info.id">
+                    <span class="iactive">+ {{ department_info.name }}</span>
+                    <span class="badge badge-info badge-pill">{{ department_info.subAmount }}</span>
+                  </div>
+                </button>
+                <!-- 二类科室列表 -->
+                <ul class="collapse list-group list-group-flush" :id="department_info.id">
+                  <li class="list-group-item subDepartmentListItem" v-for="subDepartment in department_info.detail"
+                     :class="currentChosenSub === subDepartment.id ? 'subItemActive' : ''" :getClickedId="subDepartment.id" @click="chooseWhichDepartment($event)">
+                    {{ subDepartment.name }}
+                  </li>
+                </ul>
+              </div>
+            </ul>
+          </div>
+
+          <!-- 就诊人信息 -->
+          <div class="card mb-4" v-show="isReserve === true">
+            <!-- 管理就诊人 -->
+            <div class="card-body" v-show="isPatientInfoExist === 0">
+              <h5 class="card-title">管理就诊人</h5>
+              <hr>
+              <button type="button" class="btn btn-primary btn-block setBlueBgAndBorderColor" @click="isPatientInfoExist = 2">选择或修改已有就诊人信息</button>
+              <button type="button" class="btn btn-secondary btn-block setGreenBgAndBorderColor" @click="isPatientInfoExist = 1">新增就诊人信息</button>
+              <hr>
+              <!-- 显示当前就诊人 -->
+              <div class="form-group row ">
+                <h5 class="card-title form-control order-lg-1 col-lg-7 mb-2 mb-lg-0 ml-lg-3 mr-lg-4">当前就诊人：{{currentPatient.name}}</h5>
+                <button type="submit" class="btn btn-outline-danger mx-auto order-lg-2 col-8 col-md-12 col-lg-3 mx-0" v-on:click="deletePatientInfo()">删除</button>
+              </div>
+            </div>
+            <!-- 新增就诊人 -->
+            <div class="card-body needs-validation" novalidate v-show="isPatientInfoExist === 1">
+              <div class="card-title d-flex flex-row justify-content-between align-items-center">
+                <h5>新增就诊人</h5>
+                <img src="./images/cancelBtn_blue.png" class="reserveCancelBtn cursor-pointer" style="margin-top: -5px;" @click="isPatientInfoExist = 0"/>
+              </div>
+              <hr>
+              <div class="form-group row">
+                <div class="col">
+                  <label for="patientName">姓名</label>
+                  <input type="text" class="form-control" id="patientName" v-model="currentPatient.name" placeholder="" required>
+                  <small class="invalid-feedback" style="font-size: 0.1rem;">
+                    请填写就诊人姓名
+                  </small>
+                </div>
+                <div class="col">
+                  <label for="patientNation">民族</label>
+                  <input type="text" class="form-control" id="patientNation" v-model="currentPatient.nation" placeholder="如：汉族" required>
+                  <small class="invalid-feedback" style="font-size: 0.1rem;">
+                    请填写就诊人民族
+                  </small>
+                </div>
+                <div class="col">
+                  <label>性别</label>
+                  <div class="row">
+                    <div class="custom-control custom-radio col ml-3">
+                      <input type="radio" class="custom-control-input" id="patientGender_male" value="男" v-model="currentPatient.gender" required>
+                      <label class="custom-control-label" for="patientGender_male">男</label>
+                    </div>
+                    <div class="custom-control custom-radio col ml-3 ml-md-3 mr-md-3">
+                      <input type="radio" class="custom-control-input" id="patientGender_female" value="女" v-model="currentPatient.gender" required>
+                      <label class="custom-control-label" for="patientGender_female">女</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="patientCardType">证件类型</label>
+                <select class="form-control" id="patientCardType" v-model="currentPatient.cardType" required>
+                  <option>中华人民共和国居民身份证</option>
+                  <option>军人证件</option>
+                  <option>港澳台身份证件</option>
+                  <option>华侨身份证</option>
+                  <option>外籍护照</option>
+                </select>
+              </div>
+              <div class="form-group">
+                  <label for="patientCardNumber">证件号码</label>
+                  <input type="text" class="form-control" id="patientCardNumber" v-model="currentPatient.cardNumber" placeholder="" required>
+                  <small class="invalid-feedback" style="font-size: 0.1rem;">
+                    请填写就诊人证件号码
+                  </small>
+              </div>
+              <div class="form-group row">
+                <div class="col">
+                  <label for="patientBirthday">出生日期</label>
+                  <input type="text" class="form-control" id="patientBirthday" v-model="currentPatient.birthday" placeholder="如：20220926" required>
+                  <small class="invalid-feedback" style="font-size: 0.1rem;">
+                    请填写就诊人出生日期
+                  </small>
+                </div>
+                <div class="col">
+                  <label for="patientTelephone">电话号码</label>
+                  <input type="text" class="form-control" id="patientTelephone" v-model="currentPatient.telephone" placeholder="" required>
+                  <small class="invalid-feedback" style="font-size: 0.1rem;">
+                    请填写就诊人电话号码
+                  </small>
+                </div>
+              </div>
+              <!-- 底部保存按钮 -->
+              <div class="row">
+                <div class="form-group order-md-1 col-lg-7 mb-2 mb-lg-0 ml-4 pr-lg-0 d-flex align-items-center">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="PatientCheckInfo" required>
+                    <label class="form-check-label" for="PatientCheckInfo">
+                      我已确认上述信息准确无误
+                    </label>
+                    <small class="invalid-feedback" style="font-size: 0.1rem;">
+                      在保存信息之前您必须确认个人信息并勾选此项
+                    </small>
+                  </div>
+                </div>
+                <button class="btn btn-primary setGreenBgAndBorderColor mx-auto order-md-2 col-9 col-lg-3 mx-0" type="submit" @click="savePatientInfo()">保存</button>
+              </div>
+            </div>
+            <!-- 选择已有就诊人 -->
+            <div class="card-body" v-show="isPatientInfoExist === 2">
+              <div class="card-title d-flex flex-row justify-content-between align-items-center">
+                <h5>查询或修改已有信息</h5>
+                <img src="./images/cancelBtn_blue.png" class="reserveCancelBtn cursor-pointer" style="margin-top: -5px;" @click="isPatientInfoExist = 0; isShowSearchResult = false"/>
+              </div>
+              <hr>
+              <!-- 查询已有就诊人信息 -->
+              <div class="form-group row">
+                <div class="col col-12 col-lg-4 mb-3 mb-lg-0">
+                  <label for="patientName">姓名</label>
+                  <input type="text" class="form-control" id="patientName" v-model="userSubmitInfo.name" placeholder="" required>
+                </div>
+                <div class="col col-12 col-lg-8">
+                  <label for="patientCardType">证件类型</label>
+                  <select class="form-control" id="patientCardType" v-model="userSubmitInfo.cardType" required>
+                    <option>中华人民共和国居民身份证</option>
+                    <option>军人证件</option>
+                    <option>港澳台身份证件</option>
+                    <option>华侨身份证</option>
+                    <option>外籍护照</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label for="patientCardNumber">证件号码</label>
+                  <input type="text" class="form-control" id="patientCardNumber" v-model="userSubmitInfo.cardNumber" placeholder="" required>
+              </div>
+              <div class="form-group d-flex justify-content-between">
+                <button class="btn btn-primary setGreenBgAndBorderColor" @click="searchPatientInfo()" style="width: 30%;">查询</button>
+                <button class="btn btn-primary setGreenBgAndBorderColor" @click="updatePatientInfo()" style="width: 30%;">修改</button>
+                <button class="btn btn-primary setGreenBgAndBorderColor" @click="choosePatientInfo()" style="width: 30%;">选择并返回</button>
+              </div>
+              <hr>
+              <!-- 列表显示查询结果 -->
+              <ul class="list-group list-group-flush" v-if="isShowSearchResult === true">
+                <li class="list-group-item"><span>姓名：&emsp;&emsp;&emsp;&emsp;</span>{{searchPatient.name}}</li>
+                <li class="list-group-item"><span>民族：&emsp;&emsp;&emsp;&emsp;</span>{{searchPatient.nation}}</li>
+                <li class="list-group-item"><span>性别：&emsp;&emsp;&emsp;&emsp;</span>{{searchPatient.gender}}</li>
+                <li class="list-group-item"><span>证件类型：&emsp;&emsp;</span>{{searchPatient.cardType}}</li>
+                <li class="list-group-item"><span>证件号码：&emsp;&emsp;</span>{{searchPatient.cardNumber}}</li>
+                <li class="list-group-item"><span>出生日期：&emsp;&emsp;</span>{{searchPatient.birthday}}</li>
+                <li class="list-group-item"><span>电话号码：&emsp;&emsp;</span>{{searchPatient.telephone}}</li>
+              </ul>
+            </div>
+            <!-- 修改查询到的信息 -->
+            <div class="card-body" v-if="isPatientInfoExist === 3">
+              <div class="card-title d-flex flex-row justify-content-between align-items-center">
+                <h5>修改就诊人信息</h5>
+                <img src="./images/cancelBtn_blue.png" class="reserveCancelBtn cursor-pointer" style="margin-top: -5px;" @click="isPatientInfoExist = 0; isShowSearchResult = false"/>
+              </div>
+              <hr>
+              <div class="form-group row">
+                <div class="col">
+                  <label for="patientName">姓名</label>
+                  <input type="text" class="form-control" id="patientName" v-model="updatePatient.name" placeholder="" required>
+                </div>
+                <div class="col">
+                  <label for="patientNation">民族</label>
+                  <input type="text" class="form-control" id="patientNation" v-model="updatePatient.nation" placeholder="如：汉族" required>
+                </div>
+                <div class="col">
+                  <label>性别</label>
+                  <div class="row">
+                    <div class="custom-control custom-radio col ml-3">
+                      <input type="radio" class="custom-control-input" id="patientGender_male" value="男" v-model="updatePatient.gender" required>
+                      <label class="custom-control-label" for="patientGender_male">男</label>
+                    </div>
+                    <div class="custom-control custom-radio col ml-3 ml-md-3 mr-md-3">
+                      <input type="radio" class="custom-control-input" id="patientGender_female" value="女" v-model="updatePatient.gender" required>
+                      <label class="custom-control-label" for="patientGender_female">女</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="patientCardType">证件类型</label>
+                <select class="form-control" id="patientCardType" v-model="updatePatient.cardType" required>
+                  <option>中华人民共和国居民身份证</option>
+                  <option>军人证件</option>
+                  <option>港澳台身份证件</option>
+                  <option>华侨身份证</option>
+                  <option>外籍护照</option>
+                </select>
+              </div>
+              <div class="form-group">
+                  <label for="patientCardNumber">证件号码</label>
+                  <input type="text" class="form-control" id="patientCardNumber" v-model="updatePatient.cardNumber" placeholder="" required>
+              </div>
+              <div class="form-group row">
+                <div class="col">
+                  <label for="patientBirthday">出生日期</label>
+                  <input type="text" class="form-control" id="patientBirthday" v-model="updatePatient.birthday" placeholder="如：20220926" required>
+                </div>
+                <div class="col">
+                  <label for="patientTelephone">电话号码</label>
+                  <input type="text" class="form-control" id="patientTelephone" v-model="updatePatient.telephone" placeholder="" required>
+                </div>
+              </div>
+              <!-- 底部修改按钮 -->
+              <div class="form-group d-flex justify-content-end">
+                <button type="button" class="btn btn-primary setGreenBgAndBorderColor" data-toggle="modal" data-target="#updateSuccessModal" style="width: 30%;">确认修改</button>
+              </div>
+              <!-- 修改成功弹窗 -->
+              <div class="modal fade" id="updateSuccessModal" tabindex="-1" aria-labelledby="updateSuccessModal-title" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="updateSuccessModal-title">就诊人信息修改成功！</h5>
+                    </div>
+                    <div class="modal-body">
+                      点击<span style="color: #e67777;"> 确定 </span>使用该就诊人信息并返回挂号页面
+                    </div>
+                    <div class="modal-footer">
+                      <!-- 由于组件不够灵活。。实际上调用确认修改函数的按钮为模态框中的确认按钮，而不是修改就诊人模块中的确认修改按钮。。 -->
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" @click="saveUpdatePatientInfo()">确定</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 预约挂号信息管理 -->
+          <div class="card" v-show="isReserve === true">
+            <!-- 查询挂号 -->
+            <div class="card-body">
+              <div class="card-title"><h5>管理挂号</h5></div>
+              <hr>
+              <!-- 填写查找信息 -->
+              <div class="form-group row">
+                <div class="col col-12 col-lg-4 mb-3 mb-lg-0">
+                  <label for="patientName">姓名</label>
+                  <input type="text" class="form-control" id="patientName" v-model="userSubmitInfo.name" placeholder="">
+                </div>
+                <div class="col col-12 col-lg-8">
+                  <label for="patientCardType">证件类型</label>
+                  <select class="form-control" id="patientCardType" v-model="userSubmitInfo.cardType">
+                    <option>中华人民共和国居民身份证</option>
+                    <option>军人证件</option>
+                    <option>港澳台身份证件</option>
+                    <option>华侨身份证</option>
+                    <option>外籍护照</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label for="patientCardNumber">证件号码</label>
+                  <input type="text" class="form-control" id="patientCardNumber" v-model="userSubmitInfo.cardNumber" placeholder="">
+              </div>
+              <div class="form-group row">
+                <button class="btn btn-primary setGreenBgAndBorderColor mx-auto order-lg-1 col-8 col-lg-3 mb-2 mb-lg-0 ml-lg-3 mr-lg-4 " @click="resetSearchInfo()">重置</button>
+                <button class="btn btn-primary setGreenBgAndBorderColor mx-auto order-lg-2 col-8 col-lg-7" @click="searchReservationInfo()">查询</button>
+              </div>
+              <hr>
+              <!-- 列表显示查询结果 -->
+              <ul class="list-group" v-if="isShowSearchReservationResult === true">
+                <div v-for="(reservationRecord,index) in searchReservation">
+                  <div class="card mb-3">
+                    <div class="card-body" style="background-color: #f8f9fa6b;">
+                      <div class="card-title d-flex flex-row justify-content-end align-items-center">
+                        <span class="mr-3">取消挂号</span>
+                        <img src="./images/cancelBtn_blue.png" class="deleteReservationBtn cursor-pointer" :id="'reservationRecord_' + reservationRecord.id" @click="deleteReservation($event)"/>
+                      </div>
+                      <hr>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><span>预约科室：&emsp;&emsp;</span>{{reservationRecord.department}}</li>
+                        <li class="list-group-item"><span>预约医生：&emsp;&emsp;</span>{{reservationRecord.doctor}}</li>
+                        <li class="list-group-item">
+                          <span>预约日期：&emsp;&emsp;</span>{{reservationRecord.date}}&emsp;
+                          <span v-if="reservationRecord.ampm === 'am'">上午</span><span v-if="reservationRecord.ampm === 'pm'">下午</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 排班信息 -->
+        <div class="order-md-2 col-11 col-md-7 ml-md-1">
+          <!-- 顶部提示信息 -->
+          <div class="card mt-4 mt-md-0 mb-4" style="border: 0.5px solid rgba(0,0,0,.125); border-radius: 0.25rem;">
+            <div class="card-body alert-success d-flex flex-row justify-content-between align-items-center" style="font-size: 1.1em;">
+              <!-- 请使用左侧 <strong>搜索框</strong> 或 <strong>导航栏</strong> 选择就诊科室！ -->
+              <strong v-if="isReserve === false">当前科室 >> {{currentSubDepartment.name}}</strong>
+              <strong v-else>当前医生 >> <span class="cursor-pointer" @click="isReserving('')">{{currentSubDepartment.name}}</span> >> {{currentDoctor.name}}</strong>
+              <div class="reserveBackBtn cursor-pointer" id="reserveBackBtn" style="font-size: 1.1em; display: flex; align-items: center;"
+                   v-show="isReserve === true" @click="isReserving('')">
+                <span>返回&nbsp;&nbsp;</span>
+                <img src="./images/backBtn_green.png" style="margin-top: 2px;"/>
+              </div>
+            </div>
+          </div>
+          <!-- 当前科室医生列表 -->
+          <div class="row row-cols-1 row-cols-md-2" v-show="isReserve === false">
+            <div class="col mb-4" v-for="doctor in currentSubDepartment.detail">
+              <div class="card" :getClickedId="doctor.id">
+                <div class="card-body" style="background-color: #f8f9fa6b;">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">{{doctor.name}}</h5>
+                    <span class="badge badge-success" v-if="doctor.lever === '1'">主任医师</span>
+                    <span class="badge badge-primary" v-else-if="doctor.lever === '2'" style="background-color: #006699;">副主任医师</span>
+                    <span class="badge badge-warning" v-else>主治医师</span>
+                  </div>
+                  <hr>
+                  <p class="card-text">这是一些关于此医生的介绍 这是一些关于此医生的介绍 这是一些关于此医生的介绍 这是一些关于此医生的介绍</p>
+                  <hr>
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-outline-success" v-if="doctor.state === '1'" @click="isReserving(doctor)">有号</button>
+                    <a class="btn btn-secondary disabled" role="button" v-else>无号</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 预约挂号 -->
+          <div class="row row-cols-1" v-show="isReserve === true">
+            <!-- 当前医生介绍 -->
+            <div class="col mb-4">
+              <div class="card">
+                <div class="d-flex">
+                  <div class="m-4">
+                    <img :src="'./images/doctor/' + currentDoctor.id + '.png'" class="doctorPhoto" alt="暂无照片">
+                  </div>
+                  <div class="">
+                    <div class="card-body">
+                      <h5 class="card-title">{{currentDoctor.name}}</h5>
+                      <p class="card-text">{{currentDoctor.intro}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 预约时间列表 -->
+            <div class="col mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title mb-3">
+                    <h5>预约挂号</h5>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <!-- 表头 -->
+                      <thead>
+                        <tr class="text-center scheduleFormHeader">
+                          <th scope="col"></th>
+                          <th scope="col d-flex" v-for="(dayItem,index) of days">
+                            <div>{{dayItem.week}}</div>
+                            <div class="mt-1" style="font-size: 0.9em; font-weight: 500; color: #838385;">{{dayItem.shortDate}}</div>
+                          </th>
+                        </tr>
+                      </thead>
+                      <!-- 内容 -->
+                      <tbody>
+                        <tr class="text-center">
+                          <th scope="row">上午</th>
+                          <td v-for="(infoItem,index) of scheduleInfoAm">
+                            <div class="infoItem" data-toggle="modal" data-target="#reservationForm" :class="{'selectedScheduleDate':infoItem.date === currentBookedDate && currentBookedAmPm === 'am'}">
+                              <span v-if="infoItem.currentBooked < infoItem.maxBooked" class="selectedSchedule cursor-pointer" @click="getIndex(infoItem.date,index,'am')">预约</span>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr class="text-center">
+                          <th scope="row">下午</th>
+                          <td v-for="(infoItem,index) of scheduleInfoPm">
+                            <div class="infoItem" data-toggle="modal" data-target="#reservationForm" :class="{'selectedScheduleDate':infoItem.date === currentBookedDate && currentBookedAmPm === 'pm'}">
+                              <span v-if="infoItem.currentBooked < infoItem.maxBooked" class="selectedSchedule cursor-pointer" @click="getIndex(infoItem.date,index,'pm')">预约</span>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 使用模态框提交挂号信息 -->
+            <div class="modal fade" id="reservationForm" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="reservationForm-title" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="reservationForm-title">新增预约挂号</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body reservationForm-content">
+                    <div>
+                      <div class="form-group row">
+                        <div class="col order-md-1 col-12 col-sm-6 mb-3 mb-sm-0">
+                          <label for="reservationDepartment">预约科室</label>
+                          <div class="form-control" id="reservationDepartment">{{currentSubDepartment.name}}</div>
+                        </div>
+                        <div class="col order-md-2 col-12 col-sm-6">
+                          <label for="reservationDoctor">预约医生</label>
+                          <div class="form-control" id="reservationDoctor">{{currentDoctor.name}}</div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col order-md-1 col-12 col-sm-6 mb-3 mb-sm-0">
+                          <label for="reservationDate">预约日期</label>
+                          <div class="form-control" id="reservationDate">
+                            {{currentBookedDate}}
+                            <span v-if="currentBookedAmPm === 'am'">上午</span><span v-if="currentBookedAmPm === 'pm'">下午</span>
+                          </div>
+                        </div>
+                        <div class="col order-md-2 col-12 col-sm-6">
+                          <label for="reservationPatient">
+                            就诊人
+                            <span class="cursor-pointer" style="font-size: 0.5em; color: #838385" @click="isShowSubmitForm = true"> &emsp;修改/新增就诊人</span>
+                          </label>
+                          <div class="form-control" id="reservationPatient">{{currentPatient.name}}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 新增/修改就诊人信息 -->
+                    <div v-if="isShowSubmitForm === true">
+                      <hr><div class="card-title"><h5>新增/修改就诊人信息</h5></div><hr>
+                      <div class="form-group row">
+                        <div class="col">
+                          <label for="patientName">就诊人</label>
+                          <input type="text" class="form-control" id="patientName" v-model="currentPatient.name" placeholder="">
+                        </div>
+                        <div class="col">
+                          <label for="patientNation">民族</label>
+                          <input type="text" class="form-control" id="patientNation" v-model="currentPatient.nation" placeholder="如：汉族">
+                        </div>
+                        <div class="col">
+                          <label>性别</label>
+                          <div class="row">
+                            <div class="custom-control custom-radio col ml-3">
+                              <input type="radio" class="custom-control-input" id="patientGender_male" value="男" v-model="currentPatient.gender" required>
+                              <label class="custom-control-label" for="patientGender_male">男</label>
+                            </div>
+                            <div class="custom-control custom-radio col ml-3 ml-md-3 mr-md-3">
+                              <input type="radio" class="custom-control-input" id="patientGender_female" value="女" v-model="currentPatient.gender" required>
+                              <label class="custom-control-label" for="patientGender_female">女</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="patientCardType">证件类型</label>
+                        <select class="form-control" id="patientCardType" v-model="currentPatient.cardType">
+                          <option>中华人民共和国居民身份证</option>
+                          <option>军人证件</option>
+                          <option>港澳台身份证件</option>
+                          <option>华侨身份证</option>
+                          <option>外籍护照</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="patientCardNumber">证件号码</label>
+                          <input type="text" class="form-control" id="patientCardNumber" v-model="currentPatient.cardNumber" placeholder="">
+                      </div>
+                      <div class="form-group row">
+                        <div class="col">
+                          <label for="patientBirthday">出生日期</label>
+                          <input type="text" class="form-control" id="patientBirthday" v-model="currentPatient.birthday" placeholder="如：20220926">
+                        </div>
+                        <div class="col">
+                          <label for="patientTelephone">电话号码</label>
+                          <input type="text" class="form-control" id="patientTelephone" v-model="currentPatient.telephone" placeholder="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="isShowSubmitForm = false">取消</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" @click="saveReservationInfo()">保存</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="scripts/reservation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  </body>
+</html>
