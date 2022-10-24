@@ -2,7 +2,7 @@
 new Vue({
     el: '#home',
     data: {
-        home_pic_url: "../Test-World-Hospital-Website/images/bg_pic2.png",
+        home_pic_url: "./images/bg_pic2.png",
         currentID: 2,
     },
     methods: {
@@ -19,9 +19,9 @@ new Vue({
                 wideScreen = false;
             }
             if(wideScreen)
-                this.home_pic_url = '../Test-World-Hospital-Website/images/bg_pic' + this.currentID + '.png';
+                this.home_pic_url = './images/bg_pic' + this.currentID + '.png';
             else
-                this.home_pic_url = '../Test-World-Hospital-Website/images/bg_pic' + this.currentID + '_sm.png';
+                this.home_pic_url = './images/bg_pic' + this.currentID + '_sm.png';
         },
         go_reservation: function() {
             window.location.href = '../reservation.html';
